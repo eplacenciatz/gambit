@@ -6,6 +6,7 @@ import (
 
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/eplacenciatz/gambit/auth"
+	"github.com/eplacenciatz/gambit/routers"
 )
 
 func Manejadores(path string, method string, body string, headers map[string]string, request events.APIGatewayV2HTTPRequest) (int, string) {
@@ -76,6 +77,10 @@ func ProcesoProducts(body string, path string, method string, user string, id in
 	return 400, "Method Invalid"
 }
 func ProcesoCategory(body string, path string, method string, user string, id int, request events.APIGatewayV2HTTPRequest) (int, string) {
+	switch method {
+	case "POST":
+		return routers.InserCategory(body, user)
+	}
 	return 400, "Method Invalid"
 }
 func ProcesoStock(body string, path string, method string, user string, id int, request events.APIGatewayV2HTTPRequest) (int, string) {
