@@ -20,7 +20,7 @@ func Manejadores(path string, method string, body string, headers map[string]str
 		return statusCode, user
 	}
 
-	fmt.Println("Switch del path: ", path[1:5])
+	fmt.Println("Switch del path: " + path[1:5])
 
 	switch path[1:5] {
 	case "user":
@@ -82,6 +82,8 @@ func ProcesoCategory(body string, path string, method string, user string, id in
 	switch method {
 	case "POST":
 		return routers.InserCategory(body, user)
+	case "PUT":
+		return routers.UpdateCategory(body, user, id)
 	}
 	return 400, "Method Invalid"
 }
