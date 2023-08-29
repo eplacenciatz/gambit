@@ -49,14 +49,14 @@ func UpdateCategory(c models.Category) error {
 
 	sentencia := "UPDATE category SET "
 	if len(c.CategName) > 0 {
-		sentencia += " Categ_Name = '" + tools.EscapeString(c.CategName)
+		sentencia += " Categ_Name = '" + tools.EscapeString(c.CategName) + "'"
 	}
 
 	if len(c.CategPath) > 0 {
 		if !strings.HasSuffix(sentencia, "SET") {
 			sentencia += ", "
 		}
-		sentencia += " Categ_Path = '" + tools.EscapeString(c.CategPath)
+		sentencia += " Categ_Path = '" + tools.EscapeString(c.CategPath) + "'"
 	}
 
 	sentencia += " WHERE Categ_Id = " + strconv.Itoa(c.CategID)
