@@ -84,6 +84,8 @@ func ProcesoCategory(body string, path string, method string, user string, id in
 		return routers.InserCategory(body, user)
 	case "PUT":
 		return routers.UpdateCategory(body, user, id)
+	case "DELETE":
+		return routers.DeleteCategory(body, user, id)
 	}
 	return 400, "Method Invalid"
 }
