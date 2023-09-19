@@ -9,7 +9,7 @@ import (
 	"github.com/eplacenciatz/gambit/models"
 )
 
-func InserCategory(body string, User string) (int, string) {
+func InsertCategory(body string, User string) (int, string) {
 	var t models.Category
 
 	err := json.Unmarshal([]byte(body), &t)
