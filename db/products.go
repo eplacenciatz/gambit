@@ -79,3 +79,32 @@ func InsertProduct(p models.Product) (int64, error) {
 	return LastInsertId, nil
 
 }
+
+func UpdateProduct(p models.Product) error {
+	fmt.Println("Comienza Registro de UpdateCategory")
+
+	err := DbConnect()
+	if err != nil {
+		return err
+	}
+	defer Db.Close()
+
+	sentencia := "UPDATE products SET "
+	sentencia = tools.ArmoSentencia(sentencia, "Prod_Title", "S", models.Values{String: p.ProdTitle})
+	sentencia = tools.ArmoSentencia(sentencia, "Prod_Description", "S", models.Values{String: p.ProdDescription})
+	sentencia = tools.ArmoSentencia(sentencia, "Prod_Price", "F", models.Values{Float: p.ProdPrice})
+	sentencia = tools.ArmoSentencia(sentencia, "Prod_CategoryId", "N", models.Values{Int: p.ProdCategId})
+	sentencia = tools.ArmoSentencia(sentencia, "Prod_Stock", "N", models.Values{Int: p.ProdStock})
+	sentencia = tools.ArmoSentencia(sentencia, "Prod_Path", "S", models.Values{String: p.ProdPath})
+
+	sentencia += "WHERE Prod_Id = " + strconv.Itoa(p.ProdId)
+
+	_, err = Db.Exec(sentencia)
+	if err != nil {
+		fmt.Println(err.Error())
+		return err
+	}
+
+	fmt.Println("Update Product > Ejecución Exitosa")
+	return nil
+}

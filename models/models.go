@@ -33,3 +33,10 @@ type Product struct {
 	ProdSearch      string  `json:"search,omitempty"`
 	ProdCategPath   string  `json:"categPath,omitempty"`
 }
+
+// Estructura para los parámetros opcionales
+type Values struct {
+	String string
+	Int    int
+	Float  float64
+}
